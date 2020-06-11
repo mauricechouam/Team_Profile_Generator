@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require("fs");
 
 // Using __dirname is the absolute path to the directory containing the source file
-const template = path.resolve(__dirname, "../templates");
+const templatedisplay = path.resolve(__dirname, "../templates");
 
 // fucntion to generate html file with classes
 const render = team => {
@@ -16,7 +16,7 @@ const render = team => {
         ///method creates a new array with all elements that pass the test implemented by the member function.
         .filter(member => member.getRole() === "Manager")
        // method creates a new array populated with the results of calling a manager function on every element in the calling array
-        .map(manager => renderManager(manager))
+        .map(manager => interrender(manager))
     );
 
       // Append Engineer to the team Array 
@@ -24,7 +24,7 @@ const render = team => {
         ///method creates a new array with all Engineer that pass the test implemented by the member function.
         .filter(member => member.getRole() === "Engineer")
        // method creates a new array populated with the results of calling a Engineer function on every element in the calling array
-        .map(engineer => renderEngineer(engineer))
+        .map(engineer => engineerrender(engineer))
     );
 
       // Append Intern to the team Array 
@@ -35,7 +35,47 @@ const render = team => {
         .map(intern => renderIntern(intern))
     );
     // The join() method creates and returns a new string by concatenating all of the elements in an array 
-    return renderMain(html.join(""))
-
+    return Mainrender(html.join(""))
 }
+// fucntion render manager
+const interrender = manager => {
+    let displayhtml = fs.readFileSync(path.resolve(templatedisplay, "manager.html"), "utf8");
+    displayhtml = changeItem(displayhtml, "name", manager.getName());
+    displayhtml = changeItem(displayhtml, "role", manager.getRole());
+    displayhtml = changeItem(displayhtml, "email", manager.getEmail());
+    displayhtml = changeItem(displayhtml, "id", manager.getID());
+    displayhtml = changeItem(displayhtml, "officenum", manager.getOffice());
+    return displayhtml;
+};
+// fucntion render Engineer
+const engineerrender = engineer => {
+    let displayhtml = fs.readFileSync(path.resolve(templatedisplay, "engineer.html"), "utf8");
+    displayhtml = changeItem(displayhtml, "name", engineer.getName());
+    displayhtml = changeItem(displayhtml, "role", engineer.getRole());
+    displayhtml = changeItem(displayhtml, "email", engineer.getEmail());
+    displayhtml = changeItem(displayhtml, "id", engineer.getID());
+    displayhtml = changeItem(displayhtml, "github", engineer.getGitHub());
+    return displayhtml;
+};
+    // fucntion render Intern use to appen intern Element on Html  
+const interrender = intern => {
+    let displayhtml = fs.readFileSync(path.resolve(templatedisplay, "intern.html"), "utf8");
+    displayhtml = changeItem(displayhtml, "name", intern.getName());
+    displayhtml = changeItem(displayhtml, "role", intern.getRole());
+    displayhtml = changeItem(displayhtml, "email", intern.getEmail());
+    displayhtml = changeItem(displayhtml, "id", intern.getID());
+    displayhtml = changeItem(displayhtml, "schoolname", intern.getSchool());
+    return displayhtml;
+};
 
+// Function Mainrender using to display the main HTML page with all Element 
+const Mainrender = mainhtml => {
+    const displayhtml = fs.readFileSync(path.resolve(templatedisplay, "main.html"), "utf8")
+    return changeItem(displayhtml, "team", mainhtml);
+    
+};
+
+// function ChangeItem
+const changeItem = (example, placeholder, value) => {
+    
+}
