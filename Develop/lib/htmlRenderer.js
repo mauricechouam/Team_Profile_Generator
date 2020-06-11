@@ -77,5 +77,7 @@ const Mainrender = mainhtml => {
 
 // function ChangeItem
 const changeItem = (example, placeholder, value) => {
+    const pattern = new RegExp("{{" + placeholder + "}}", "gm")
+    return example.replace(pattern, value);
     
 }
