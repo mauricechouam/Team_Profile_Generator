@@ -8,7 +8,7 @@ const fs = require("fs");
 const templatedisplay = path.resolve(__dirname, "../templates");
 
 // fucntion to generate html file with classes
-const render = team => {
+let render = team => {
     // role type array in order to added different role 
     const role = [];
     // Append Manager to the team Array 
@@ -17,6 +17,7 @@ const render = team => {
         .filter(member => member.getRole() === "Manager")
        // method creates a new array populated with the results of calling a manager function on every element in the calling array
         .map(manager => interrender(manager))
+
     );
 
       // Append Engineer to the team Array 
@@ -24,7 +25,8 @@ const render = team => {
         ///method creates a new array with all Engineer that pass the test implemented by the member function.
         .filter(member => member.getRole() === "Engineer")
        // method creates a new array populated with the results of calling a Engineer function on every element in the calling array
-        .map(engineer => engineerrender(engineer))
+          .map(engineer => engineerrender(engineer))
+          
     );
 
       // Append Intern to the team Array 
@@ -32,7 +34,8 @@ const render = team => {
         ///method creates a new array with all intern that pass the test implemented by the member function.
         .filter(member => member.getRole() === "Intern")
        // method creates a new array populated with the results of calling a intern function on every element in the calling array
-        .map(intern => renderIntern(intern))
+          .map(intern => renderIntern(intern))
+          
     );
     // The join() method creates and returns a new string by concatenating all of the elements in an array 
     return Mainrender(html.join(""))
