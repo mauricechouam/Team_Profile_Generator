@@ -45,7 +45,7 @@ const inputQuestions = async (inputs = []) => {
         
 //intput to adde employee guithub account
         {
-            name: "github",
+            name: "employeegithub",
             message: "please enter the Employee Git hub!",
             when: function (answer) {
                 return answer["employeeRole"] === "Engineer"
@@ -79,9 +79,26 @@ const outputpath = path.resolve(__dirname, "output", "index.html");
 const render = require("./lib/htmlRenderer");
 
 const main = async () => {
-    const intputs = await inputQuestions();
+    const inputs = await inputQuestions();
+
+    let employee = [];
+    for (let i in inputs) {
+        if (inputs[i].employeeRole === "Manager") {
+            let newmanager = new Manager(inputs[i].employeeName, inputs[i].employee.ID, inputs[i].employeeEmail, inputs[i].employeeNum)
+            employee.push(newmanager);
+
+        } else if (inputs[i].employeeRole === "Engineer") {
+            let newengineer = new Engineer(inputs[i].employeeName, inputs[i].employee.ID, inputs[i].employeeEmail, inputs[i].employeegithub)
+            employee.push(newengineer);
+
+        } else {
+            let newintern= new Intern(inputs[i].employeeName, inputs[i].employee.ID, inputs[i].employeeEmail, inputs[i].schoolname)
+            employee.push(newintern);
+        }
+    }
+
     
-    
+
     
 }
 
