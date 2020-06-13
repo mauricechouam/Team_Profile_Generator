@@ -8,33 +8,33 @@ const fs = require("fs");
 // asynchrome promt asking user to provider informations
 const inputQuestions = async (inputs = []) => {
     const prompts = [
-// intput to add employee name
+        // intput to add employee name
         {
             name: "employeeName",
             message: "please enter the employee name!",
             valide: valideName
         },
-// intput to added Employee ID
+        // intput to added Employee ID
         {
             name: "employeeID",
             message: "please enter the employee ID!",
             valide: valideID
         },
-// intput to add employee Email
+        // intput to add employee Email
         {
             name: "employeeEmail",
             message: "please enter the employee Email!",
             default: "employeea@mail.com",
             valide: valideEmail
         },
-//intput to add employee Role
+        //intput to add employee Role
         {
             type: "list",
             name: "employeeRole",
             message: "please select the Employee Role!",
             choices: ["Manager", "Engineer", "Intern"]
         },
-// intput to add manager office number
+        // intput to add manager office number
         {
             name: "officeNum",
             message: "please enter the office number!",
@@ -42,8 +42,8 @@ const inputQuestions = async (inputs = []) => {
                 return answer["employeeRole"] === "Manager"
             }
         },
-        
-//intput to adde employee guithub account
+
+        //intput to adde employee guithub account
         {
             name: "employeegithub",
             message: "please enter the Employee Git hub!",
@@ -51,7 +51,7 @@ const inputQuestions = async (inputs = []) => {
                 return answer["employeeRole"] === "Engineer"
             }
         },
-// input to add intern school name
+        // input to add intern school name
         {
             name: "schoolname",
             message: "please enter the School Name",
@@ -59,7 +59,7 @@ const inputQuestions = async (inputs = []) => {
                 return answer["employeeRole"] === "Intern"
             }
         },
-// if user want tp add more employee
+        // if user want tp add more employee
         {
             type: "confirm",
             name: "more",
@@ -68,7 +68,7 @@ const inputQuestions = async (inputs = []) => {
 
     ]
 
-// await prompt for addind more employee
+    // await prompt for addind more employee
     const { more, ...answer } = await inquirer.prompt(prompts);
     const newInputs = [...inputs, answers];
     return more ? inputQuestions(newInputs) : newInputs;
@@ -92,13 +92,32 @@ const main = async () => {
             employee.push(newengineer);
 
         } else {
-            let newintern= new Intern(inputs[i].employeeName, inputs[i].employee.ID, inputs[i].employeeEmail, inputs[i].schoolname)
+            let newintern = new Intern(inputs[i].employeeName, inputs[i].employee.ID, inputs[i].employeeEmail, inputs[i].schoolname)
             employee.push(newintern);
         }
     }
+    fs.writeFile(outputpath, render(employee), err => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Completed with success");
+    })
+};
 
-    
-
-    
+function valideID(id) {
+    const regid = /^\d+$/;
+    return regid.test(id) || "Invalid ID !! please enter a Number"
 }
+function valideName(name) {
+    return name !== '' || "Invalid name !! Please enter a name!"
+}
+function valideEmail(email) {
+    const redemail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return redemail.test(email) || "Invalid Email !! please enter a valid Email"
+}
+
+main();
+
+
+
 
