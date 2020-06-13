@@ -25,12 +25,12 @@ const inputquestions = async (inputs = []) => {
     {
         type: 'list',
         name: 'employeeType',
-        message: "Who would you like to enter first?",
+        message: "Please Select the Employee Role",
         choices: ['Manager','Engineer','Intern']
     },
     {
         name: 'officeNumber',
-        message: 'Please enter office phone number',
+        message: 'Please enter the manager office number',
         when: function( answers ) {
             return answers['employeeType']==='Manager'
         }
@@ -44,7 +44,7 @@ const inputquestions = async (inputs = []) => {
     },
     {
         name: "school",
-        message: 'Please enter school',
+        message: 'Please enter The Intern school Name',
         when: function( answers ) {
             return answers['employeeType']==='Intern'
         }
@@ -95,17 +95,17 @@ const main = async () => {
 function validateId(id)
 {
     const reg = /^\d+$/;
-    return reg.test(id) || "ID should be a number!";
+    return reg.test(id) || "Invalid Id!! ID should be a number!";
 }
 
 function validateName(name) {
-    return name !== '' || "Please enter Name"
+    return name !== '' || "Invalid Name!! Please enter Name"
 }
 
 function validateEmail(email) {
     
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return reg.test(email) || "Please enter a valid email";
+    return reg.test(email) || "Invalid Please enter a valid email";
     
    }
 

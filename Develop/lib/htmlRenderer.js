@@ -1,70 +1,68 @@
-// this is html renderer - it creates a generatefile based on results of inuirer in app.js for the html file ready for fs.writeFile
+// this is html renderer - it creates a template based on results of inuirer in app.js for the html file ready for fs.writeFile
 const path = require("path");
 const fs = require("fs");
 
 const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
-  const team = [];
+  let html = [];
 
-  team.push(employees
+  html.push(employees
     .filter(employee => employee.getRole() === "Manager")
     .map(manager => renderManager(manager))
-
-  );
-  team.push(employees
-    .filter(employee => employee.getRole() === "Engineer")
-    .map(engineer => renderEngineer(engineer))
-
-  );
-  team.push(employees
-    .filter(employee => employee.getRole() === "Intern")
-    .map(intern => renderIntern(intern))
     
   );
+  html.push(employees
+    .filter(employee => employee.getRole() === "Engineer")
+    .map(engineer => renderEngineer(engineer))
+  );
+  html.push(employees
+    .filter(employee => employee.getRole() === "Intern")
+    .map(intern => renderIntern(intern))
+  );
 
-  return renderMain(team.join(""));
+  return renderMain(html.join("  "));
 
 };
 
 const renderManager = manager => {
-  let generatefile = fs.readFileSync(path.resolve(templatesDir, "manager.html"), "utf8");
-  generatefile = changeitem(generatefile, "name", manager.getName());
-  generatefile = changeitem(generatefile, "role", manager.getRole());
-  generatefile = changeitem(generatefile, "email", manager.getEmail());
-  generatefile = changeitem(generatefile, "id", manager.getId());
-  generatefile = changeitem(generatefile, "officeNumber", manager.getOffice());
-  return generatefile;
+  let template = fs.readFileSync(path.resolve(templatesDir, "manager.html"), "utf8");
+  template = replacePlaceholders(template, "name", manager.getName());
+  template = replacePlaceholders(template, "role", manager.getRole());
+  template = replacePlaceholders(template, "email", manager.getEmail());
+  template = replacePlaceholders(template, "id", manager.getId());
+  template = replacePlaceholders(template, "officeNumber", manager.getOfficeNumber());
+  return template;
 };
 
 const renderEngineer = engineer => {
-  let generatefile = fs.readFileSync(path.resolve(templatesDir, "engineer.html"), "utf8");
-  generatefile = changeitem(generatefile, "name", engineer.getName());
-  generatefile = changeitem(generatefile, "role", engineer.getRole());
-  generatefile = changeitem(generatefile, "email", engineer.getEmail());
-  generatefile = changeitem(generatefile, "id", engineer.getId());
-  generatefile = changeitem(generatefile, "github", engineer.getGithub());
-  return generatefile;
+  let template = fs.readFileSync(path.resolve(templatesDir, "engineer.html"), "utf8");
+  template = replacePlaceholders(template, "name", engineer.getName());
+  template = replacePlaceholders(template, "role", engineer.getRole());
+  template = replacePlaceholders(template, "email", engineer.getEmail());
+  template = replacePlaceholders(template, "id", engineer.getId());
+  template = replacePlaceholders(template, "github", engineer.getGithub());
+  return template;
 };
 
 const renderIntern = intern => {
-  let generatefile = fs.readFileSync(path.resolve(templatesDir, "intern.html"), "utf8");
-  generatefile = changeitem(generatefile, "name", intern.getName());
-  generatefile = changeitem(generatefile, "role", intern.getRole());
-  generatefile = changeitem(generatefile, "email", intern.getEmail());
-  generatefile = changeitem(generatefile, "id", intern.getId());
-  generatefile = changeitem(generatefile, "school", intern.getSchool());
-  return generatefile;
+  let template = fs.readFileSync(path.resolve(templatesDir, "intern.html"), "utf8");
+  template = replacePlaceholders(template, "name", intern.getName());
+  template = replacePlaceholders(template, "role", intern.getRole());
+  template = replacePlaceholders(template, "email", intern.getEmail());
+  template = replacePlaceholders(template, "id", intern.getId());
+  template = replacePlaceholders(template, "school", intern.getSchool());
+  return template;
 };
 
 const renderMain = html => {
-  const generatefile = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
-  return changeitem(generatefile, "team", html);
+  const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
+  return replacePlaceholders(template, "team", html);
 };
 
-const changeitem = (generatefile, placeholder, value) => {
+const replacePlaceholders = (template, placeholder, value) => {
   const pattern = new RegExp("{{ " + placeholder + " }}", "gm");
-  return generatefile.replace(pattern, value);
+  return template.replace(pattern, value);
 };
 
 module.exports = render;
