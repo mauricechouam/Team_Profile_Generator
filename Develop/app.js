@@ -4,7 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-const eeQuestions = async (inputs = []) => {
+const inputquestions = async (inputs = []) => {
     const prompts = [
     {
         name: 'employeeName',
@@ -51,13 +51,13 @@ const eeQuestions = async (inputs = []) => {
     },
     {
         type: 'confirm',
-        name: 'again',
+        name: 'more',
         message: 'Would you like to enter more employees?'
     }
 ]
-const {again, ...answers} = await inquirer.prompt(prompts);
+const {more, ...answers} = await inquirer.prompt(prompts);
 const newInputs = [...inputs, answers];
-return again ? eeQuestions(newInputs) : newInputs;
+return more ? inputquestions(newInputs) : newInputs;
 }
 
 const outputPath = path.resolve(__dirname, "output", "team.html");
@@ -65,7 +65,7 @@ const outputPath = path.resolve(__dirname, "output", "team.html");
 const render = require("./lib/htmlRenderer");
 
 const main = async () => {
-    const inputs = await eeQuestions();
+    const inputs = await inputquestions();
 
     let employee = [];
     for (let i in inputs) {
