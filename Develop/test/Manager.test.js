@@ -3,7 +3,7 @@ const Manager = require("../lib/Manager");
 it("can  set office number  with constructor", () => {
     const getvalue = "officenum";
     const ma = new Manager("toto",1, "toto@gmail.com", getvalue);
-    expect(ma.officenum).toBe(getvalue);
+    expect(ma.officeNumber).toBe(getvalue);
 });
 
 it("getRole() return \"Manager\"", () => {
@@ -15,6 +15,6 @@ it("getRole() return \"Manager\"", () => {
 it("gets Officename Using getOffice() method", () => {
     const getvalue = "officenum";
     const ma = new Manager("toto", 1, "toto@gmail.com", getvalue);
-    expect(ma.getOffice()).toBe(getvalue);
+    expect(ma.getOfficeNumber()).toBe(getvalue);
 
 })
