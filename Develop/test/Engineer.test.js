@@ -1,7 +1,7 @@
 const Engineer = require("../lib/Engineer");
 
 it("can  set GITHUB account with constructor", () => {
-    const gitvalue = "gitHube USer";
+    const gitvalue = "gitHubeUSer";
     const en = new Engineer("toto",1, "toto@gmail.com", gitvalue);
     expect(en.github).toBe(gitvalue);
 });
@@ -16,6 +16,6 @@ it("getRole() return \"Engineer\"", () => {
 it("get github using gitHub()method" ,() => {
     const gitvalue = "githubuser";
     const en = new Engineer("toto", 1, "toto@gmail.com", gitvalue);
-    expect(en.getGitHub()).toBe(gitvalue);
+    expect(en.getGithub()).toBe(gitvalue);
 
 })

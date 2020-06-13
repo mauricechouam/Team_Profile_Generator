@@ -1,6 +1,6 @@
 const Intern = require("../lib/Intern");
 
-it("can  set GITHUB account with constructor", () => {
+it("can  set School name  with constructor", () => {
     const getvalue = "schoolname";
     const int = new Intern("toto",1, "toto@gmail.com", getvalue);
     expect(int.schoolname).toBe(getvalue);
