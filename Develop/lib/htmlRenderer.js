@@ -81,3 +81,4 @@ const changeItem = (example, placeholder, value) => {
     return example.replace(pattern, value);
     
 }
+modele.exports = render;

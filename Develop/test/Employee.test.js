@@ -1,27 +1,54 @@
 const Employee = require("../lib/Employee");
 
-describe( "Employee class", () => {
-  it("Characters that aren't digits or Employees are instantly visible", () => {
-    expect(new Employee("?").visible).toBe(true);
-  });
+it("instantiate Employee instance", () => {
+  const em = new Employee("toto", 10, "toto@gmail.com");
+  expect(typeof (em)).toBe("object");
+});
 
-  it("toString returns _ for Employees", () => {
-    expect(new Employee("a").toString()).toBe("_");
-  });
+it("Set Employee name using ", () => {
+  const name = "maurice";
+  const em = new Employee(name, 10, "toto@gmail.com");
+  expect(em.name).toBe(name);
+});
 
-  describe("guess", () => {
-    it("Correct guess returns true", () => {
-      expect(new Employee("j").guess("j")).toBe(true);
-    });
+it("Set Employee ID ", () => {
+  const idtest = 100;
+  const em = new Employee("toto", idtest, "toto@gmail.com")
+  expect(em.id).toBe(idtest);
+});
 
-    it("Incorrect guess returns false", () => {
-      expect(new Employee("j").guess("l")).toBe(false);
-    });
-  });
+it("Set Employee email using ", () => {
+  const emailtest = "email@email.com";
+  const em = new Employee("toto", 100, emailtest);
+  expect(em.email).toBe(emailtest);
+});
 
-  describe("getSolution", () => {
-    it("returns character", () => {
-      expect(new Employee("l").getSolution()).toBe("l");
-    });
+
+
+describe("getName", () => {
+  it("returns the Employe name", () => {
+    expect(new Employee("maurice").getName()).toBe("maurice");
   });
 });
+
+describe("getID", () => {
+  it("gets ID Using getID() method", () => {
+    const getvalue = 10;
+    const em = new Employee("toto", getvalue, "toto@gmail.com");
+    expect(em.getID()).toBe(getvalue);
+
+  })
+});
+
+describe("getEmail", () => {
+  it("gets Email Using getEmail() method", () => {
+    const getvalue = "email";
+    const em = new Employee("toto", 10, getvalue);
+    expect(em.getEmail()).toBe(getvalue);
+  })
+});
+
+
+
+
+
