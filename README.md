@@ -1,6 +1,13 @@
-# Object Oriented Programming and Test Driven Development: Template Engine - Employee Summary
+# Team_Profile_Generator: Object Oriented Programming and Test Driven Development
+[![GitHub license](https://img.shields.io/badge/licence-BSD3.0-green)](https://github.com/mauricechouam/Team_Profile_Generator)
 
-One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this app I demonstrate how to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, there are tests in the test directory.
+## Table of Contents ##
+  * [Description](#Description)
+  * [Technology](#Technology)
+  * [Classes](#Classes)
+  * [User input](#User_input)
+  * [Roster output](#Roster_output)
+  * [Helpful links](#Helpful_links)
 
 
 ## Description
@@ -35,7 +42,7 @@ The dependencies are, [jest](https://jestjs.io/) for running the provided tests,
 
 * The different employee types inherit some methods and properties from a base class of `Employee`.
 
-### Classes
+## Classes
 The app has these classes: `Employee`, `Manager`, `Engineer`, `Intern`. The tests for these classes in the `tests` directory.
 
 The first class is an `Employee` parent class with the following properties and
@@ -73,12 +80,12 @@ In addition to `Employee`'s properties and methods, `Intern` also has:
 
   * getRole() // Overridden to return 'Intern'
 
-### User input
+## User input
 
 The app prompt the user to build an engineering team. An engineering
 team consists of any number of managers, engineers and interns.
 
-### Roster output
+## Roster output
 
 The app generates a `team.html` page in the `output` directory, that displays a nicely formatted team roster. Each team member displays the following:
 
@@ -90,7 +97,12 @@ The app generates a `team.html` page in the `output` directory, that displays a 
 
   * Role-specific property (School, link to GitHub profile, or office number)
 
-## Information validation
 
-* Used validation to ensure that the information provided is in the proper expected format.
+## Helpful links
+* [Constructor Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)
 
+* [Prototype Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)
+
+* [Class Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+* [Jest Docs](https://jestjs.io/)
